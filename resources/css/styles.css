@@ -1,0 +1,26 @@
+html{
+    position: relative;
+    min-height: 100%;
+}
+.text-special{
+    color: #C08BFF;
+}
+.svg-special{
+    filter: invert(57%) sepia(54%) saturate(2571%) hue-rotate(221deg) brightness(109%) contrast(103%);
+}
+.scrollbar-hide::-webkit-scrollbar {
+    display: none;
+}
+.selected{
+    text-decoration: underline; 
+    color: #C08BFF;
+    text-underline-offset: 8px;
+    text-decoration-style: solid;
+    text-decoration-thickness: 2px;
+}
+.selected img{
+    filter: invert(57%) sepia(54%) saturate(2571%) hue-rotate(221deg) brightness(109%) contrast(103%);
+}
+.bg-special{
+    background-color: #C08BFF;
+}

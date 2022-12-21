@@ -1,0 +1,14 @@
+Web App
+	$ Navbar -- </header>
+		-- Se mantiene fixed en todo momento
+		-- Tiene z-50
+		-- Contiene el logo
+
+	$ Sidebar </nav>
+		-- Se mantiene fixed en todo momento
+		-- Tiene z-40
+		-- Distribuir los íconos de una mejor manera (task)
+
+	$ Body </main>
+		-- Containers </section>
+			
