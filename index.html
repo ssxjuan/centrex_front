@@ -58,18 +58,36 @@
 
             <div class="w-full lg:min-w-2/3">
                 <div box class="w-full bg-white p-4 rounded-t-xl flex flex-col">
-                    <p class="text-xs font-medium">Total Balance</p>
-                    <div class="flex items-center">
-                        <p class="text-2xl font-semibold text-gray-800">$0.<span class="text-lg">00</span></p>
-                        <span class="text-green-600 text-sm font-semibold ml-2">+%4.03</span>
+                    <div class="flex items-start justify-between">
+                        <p class="text-xs font-medium">Estimated Balance</p>
+                            <div class="flex items-center w-fit">
+                                <button class="font-semibold text-xs text-gray-600 px-2">6m</button>
+                                <button class="font-semibold text-xs text-gray-600 px-2">1m</button>
+                                <button class="font-semibold text-xs text-gray-600 px-2">7d</button>
+                                <button class="font-semibold text-xs mx-2 border-transparent border-2 border-b-gray-800">24h</button>
+                            </div>
+                        
                     </div>
-                    <div class="flex items-center">
-                        <img class="h-60 w-full" src="resources/images/graph--example.png">
+                    <div class="flex items-center mt-2">
+                        <img class="w-6 h-6 rounded-3xl object-cover object-left" src="https://upload.wikimedia.org/wikipedia/commons/a/a4/Flag_of_the_United_States.svg" alt="">
+                        <p class="ml-2 text-3xl text-black italic font-medium">$324,774.16</p>
+                        <p class="flex items-center bg-gray-100 px-2 py-1 text-xs font-semibold text-buy rounded-md ml-4">
+                            <img class="svg-buy w-3 mr-1" src="resources/images/trend-up.svg" alt="" class="w-4 h-4 mr-1"> 
+                            4.2%
+                        </p>
                     </div>
+
+                    <canvas id="main-line-chart" height="200"></canvas>
+                    
                 </div>
-                <div box-bottom class="w-full flex bg-white items-center border border-transparent border-t-gray-200 rounded-b-xl">
-                    <a class="w-full h-12 text-sm flex items-center justify-center font-semibold border border-transparent border-r-gray-200" href="">Buy</a>
-                    <a class="w-full h-12 text-sm flex items-center justify-center font-semibold" href="">Deposit</a>
+                <div box-bottom class="w-full px-4 py-2 flex bg-white items-center justify-between border border-transparent border-t-gray-200 rounded-b-xl">
+                    <p class="text-sm text-gray-600 font-medium">Operations</p>
+                    <div class="flex items-center">
+                        <a class="text-sm py-3 flex items-center justify-center font-semibold mr-4 text-special hover:opacity-90 duration-300" href="">Deposit</a>
+                        <a class="text-sm py-2 rounded-lg px-4 
+                        bg-special text-white flex items-center justify-center
+                        font-semibold hover:opacity-90 group duration-300" href=""><img class="invert w-4 rotate-180 mr-2 group-hover:mr-4 duration-300" src="resources/images/arrow-circle-broken-up.svg" alt=""> Buy</a>
+                    </div>
                 </div>
     
                 <p class="mt-6 text-xl font-semibold text-gray-600 lg:hidden">Investments</p>
@@ -141,6 +159,87 @@
     </main>
 
     <div class="absolute lg:hidden bottom-0 left-0 border w-full p-4 flex justify-center text-sm">© 2018-2022 Centrex.ai</div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script>
+        var ctx = document.getElementById("main-line-chart").getContext("2d");
+        var gradient = ctx.createLinearGradient(0, 0, 0, 300);
+        gradient.addColorStop(0, 'rgba(191, 138, 254, .20)'); 
+        gradient.addColorStop(0.8, 'rgba(191, 138, 254, 0)'); 
+
+        var data = {
+        labels: ["January", "February", "March", "April", "May", "June", "July"],
+        datasets: [{
+            label: "Balance",
+            backgroundColor: gradient,
+            fill:true,
+            tension: 0.4, 
+            borderColor: "#C08BFF",
+            pointColor: "#C08BFF",
+            pointRadius: [0, 4, 4, 4, 4, 4, 4],
+            pointHighlightColor: "#28AFFA",
+            data: [0, 65, 59, 72, 75, 62, 65, 75]
+            }
+        ]
+        };
+        var options = {
+        responsive: true,
+        plugins: {
+            legend: {
+                display: false,
+            },
+            tooltip: {
+                backgroundColor: 'rgba(28, 28, 33, 0.8)',
+                padding: 10,
+                displayColors: false,
+                titleFont:{
+                    family: 'Montserrat',
+                    weight: '500'
+                },
+                bodyFont:{
+                    family: 'Montserrat',
+                    weight: '400'
+                },
+            },
+        },
+        scales: {
+            x: {
+                beforeUpdate(axis) {
+                    const labels = axis.chart.data.labels;
+                        for (let i=0; i<labels.length; i++) {
+                        const lbl = labels[i];
+                        if (typeof lbl === 'string' && lbl.length > 3) {
+                            labels[i] = lbl.substring(0, 3); // cutting
+                        }
+                    }
+                },
+                grid: {
+                    drawBorder: false,
+                    display: false,
+                    zeroLineColor: 'transparent',
+                },
+                ticks: {
+                    align: 'inner',
+                    color: '#303547',
+                    font: {
+                        size: 12,
+                        family: 'Montserrat',
+                        weight: 600
+                    }
+                },
+            },
+            y: {
+                display: false,
+            },
+        },
+        };
+        var myLineChart = new Chart(ctx, {
+        type: "line",
+        data: data,
+        options: options,
+        });
+    </script>
 
 </body>
 </html>

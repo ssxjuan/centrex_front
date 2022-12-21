@@ -3,10 +3,13 @@ html{
     min-height: 100%;
 }
 .text-special{
-    color: #C08BFF;
+    color: #aa64ff;
 }
 .svg-special{
     filter: invert(57%) sepia(54%) saturate(2571%) hue-rotate(221deg) brightness(109%) contrast(103%);
+}
+.svg-buy{
+    filter: invert(54%) sepia(53%) saturate(551%) hue-rotate(125deg) brightness(90%) contrast(89%);
 }
 .scrollbar-hide::-webkit-scrollbar {
     display: none;
@@ -22,5 +25,8 @@ html{
     filter: invert(57%) sepia(54%) saturate(2571%) hue-rotate(221deg) brightness(109%) contrast(103%);
 }
 .bg-special{
-    background-color: #C08BFF;
+    background-color: #aa64ff;
+}
+.text-buy{
+    color: #27A69A;
 }
